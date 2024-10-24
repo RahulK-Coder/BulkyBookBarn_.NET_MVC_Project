@@ -21,6 +21,7 @@ namespace BulkyBook.DataAccess.Repository
 
             //_db.categories == dbSet /Starting approach
             this.dbSet = _db.Set<T>();
+            _db.Products.Include(u => u.Category).Include(u => u.CategoryId); //Using to include few fields
 
         }//Above declaration and this method is called dependency injection process 
         public void Add(T entity)
@@ -29,18 +30,43 @@ namespace BulkyBook.DataAccess.Repository
             dbSet.Add(entity);
         }
 
-        public T Get(Expression<Func<T, bool>> filter)
+        public T Get(Expression<Func<T, bool>> filter, string? includeProperties = null)
         {
 
             IQueryable<T> query = dbSet;
             query=query.Where(filter);
-            return query.FirstOrDefault();
+            if (!string.IsNullOrEmpty(includeProperties))
+            {
+                foreach (var includeProp in includeProperties
+                    .Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    query = query.Include(includeProp);
+
+                }
+            }
+            var entity = query.FirstOrDefault();
+            if (entity == null)
+            {
+                throw new InvalidOperationException("Entity not found.");
+            }
+
+            return entity;
+            //return query.FirstOrDefault(); made changes according to chatgpt
             //Category? categoryFromDB2 = _db.Categories.Where(u => u.Id==id).FirstOrDefault(); //Used for complex queries
         }
 
-        public IEnumerable<T> GetAll()
+        //Category,Covertype
+        public IEnumerable<T> GetAll(string? includeProperties = null)
         {
             IQueryable<T> query = dbSet;
+            if (!string.IsNullOrEmpty(includeProperties))
+            {
+                foreach (var includeProp in includeProperties
+                    .Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    query = query.Include(includeProp);
+                }
+            }
             return query.ToList();
         }
 
