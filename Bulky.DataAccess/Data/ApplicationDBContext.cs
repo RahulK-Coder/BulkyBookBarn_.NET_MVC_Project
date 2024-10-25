@@ -1,5 +1,6 @@
 ﻿using BulkyBook.Models;
 using BulkyBookWeb.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
@@ -7,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace BulkyBookWeb.DataAddess.Data
 {
-    public class ApplicationDBContext : IdentityDbContext
+    public class ApplicationDBContext : IdentityDbContext<IdentityUser>
     {
         public ApplicationDBContext(DbContextOptions<ApplicationDBContext>options): base(options)
         {
