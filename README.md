@@ -24,8 +24,9 @@ Welcome to **BulkyBookBarn**, a fully functional online bookstore built using **
 
 <img width="1278" alt="image" src="https://github.com/user-attachments/assets/12136b2c-b33a-4472-9162-47f4386fdb0c">
 <img width="1277" alt="image" src="https://github.com/user-attachments/assets/ecf121dd-8649-406b-b8d4-abaa2189c929">
-<img width="1277" alt="image" src="https://github.com/user-attachments/assets/a91b2890-35d8-4a32-aecb-d23853966a74">
-<img width="1279" alt="image" src="https://github.com/user-attachments/assets/cd1ba719-68f4-4bdb-8c81-6a5c3116450b">
+<img width="1275" alt="image" src="https://github.com/user-attachments/assets/7e031f2d-114c-4221-91d0-23df8f60b17e">
+<img width="1274" alt="image" src="https://github.com/user-attachments/assets/36e5db58-9bd2-4cf4-b359-9a95e329d400">
+
 
 ## Prerequisites
 
