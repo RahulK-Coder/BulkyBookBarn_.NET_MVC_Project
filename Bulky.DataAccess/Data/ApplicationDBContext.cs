@@ -18,6 +18,7 @@ namespace BulkyBookWeb.DataAddess.Data
         public DbSet<Category> Categories { get; set; }
         public DbSet<Product> Products { get; set; } //We added the product model here to connect to DB
 
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; } //This is mapper to add more properties to the existing identityuser 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
