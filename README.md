@@ -20,7 +20,8 @@ Welcome to **BulkyBookBarn**, a fully functional online bookstore built using **
 - **SendGrid API**: For email notifications.
 - **Stripe API**: For payment processing.
 
-##Screenshots
+## Technologies Used
+
 <img width="1278" alt="image" src="https://github.com/user-attachments/assets/12136b2c-b33a-4472-9162-47f4386fdb0c">
 <img width="1277" alt="image" src="https://github.com/user-attachments/assets/ecf121dd-8649-406b-b8d4-abaa2189c929">
 <img width="1277" alt="image" src="https://github.com/user-attachments/assets/a91b2890-35d8-4a32-aecb-d23853966a74">
