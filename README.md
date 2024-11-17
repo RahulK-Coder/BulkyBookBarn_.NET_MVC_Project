@@ -28,9 +28,11 @@ Cart Page
 <img width="1277" alt="image" src="https://github.com/user-attachments/assets/ecf121dd-8649-406b-b8d4-abaa2189c929">
 Shopping Cart
 <img width="956" alt="image" src="https://github.com/user-attachments/assets/457a77fc-43a0-40a8-8c39-d5c415f4b18b">
-Order Summary
+Order Summary Page
 <img width="959" alt="image" src="https://github.com/user-attachments/assets/445b63be-60c7-4ff1-a89d-86044f78bf48">
+Register Page
 <img width="1275" alt="image" src="https://github.com/user-attachments/assets/7e031f2d-114c-4221-91d0-23df8f60b17e">
+Login Page
 <img width="1274" alt="image" src="https://github.com/user-attachments/assets/36e5db58-9bd2-4cf4-b359-9a95e329d400">
 
 
