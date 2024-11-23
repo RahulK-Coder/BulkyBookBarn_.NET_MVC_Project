@@ -26,7 +26,7 @@ Home Page
 <img width="949" alt="image" src="https://github.com/user-attachments/assets/3d5953b5-2842-453e-8870-8af2d49f40ed">
 
 Cart Page
-<img width="1277" alt="image" src="https://github.com/user-attachments/assets/ecf121dd-8649-406b-b8d4-abaa2189c929">
+<img width="958" alt="image" src="https://github.com/user-attachments/assets/c436ffed-76ee-4fcc-85c1-e123e9136637">
 
 Shopping Cart
 <img width="956" alt="image" src="https://github.com/user-attachments/assets/457a77fc-43a0-40a8-8c39-d5c415f4b18b">
