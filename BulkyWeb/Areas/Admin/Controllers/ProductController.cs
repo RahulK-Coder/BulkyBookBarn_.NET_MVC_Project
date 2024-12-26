@@ -14,7 +14,7 @@ using System.Globalization;
 namespace BulkyBookWeb.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles = SD.Role_Admin)]
+    //[Authorize(Roles = SD.Role_Admin)]
     public class ProductController : Controller
     {
 
@@ -117,7 +117,7 @@ namespace BulkyBookWeb.Areas.Admin.Controllers
               
                 
                 _unitofwork.Save();
-                TempData["success"] = "Product Created Successfully";
+                TempData["success"] = "Product Updated Successfully";
                 return RedirectToAction("Index");
             }
             else

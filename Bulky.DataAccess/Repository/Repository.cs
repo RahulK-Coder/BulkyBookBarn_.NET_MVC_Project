@@ -30,11 +30,19 @@ namespace BulkyBook.DataAccess.Repository
             dbSet.Add(entity);
         }
 
-        public T Get(Expression<Func<T, bool>> filter, string? includeProperties = null)
+        public T Get(Expression<Func<T, bool>> filter, string? includeProperties = null, bool tracked = false)
         {
-
-            IQueryable<T> query = dbSet;
-            query=query.Where(filter);
+            IQueryable<T> query;
+            if (tracked)
+            {
+                query = dbSet;
+                
+            }
+            else
+            {
+                query = dbSet.AsNoTracking();
+            }
+            query = query.Where(filter);
             if (!string.IsNullOrEmpty(includeProperties))
             {
                 foreach (var includeProp in includeProperties
@@ -44,21 +52,28 @@ namespace BulkyBook.DataAccess.Repository
 
                 }
             }
-            var entity = query.FirstOrDefault();
-            if (entity == null)
-            {
-                throw new InvalidOperationException("Entity not found.");
-            }
+            return query.FirstOrDefault();
 
-            return entity;
-            //return query.FirstOrDefault(); made changes according to chatgpt
-            //Category? categoryFromDB2 = _db.Categories.Where(u => u.Id==id).FirstOrDefault(); //Used for complex queries
         }
+        //var entity = query.FirstOrDefault();
+        //if (entity == null)
+        //{
+        //    throw new InvalidOperationException("Entity not found.");
+        //}
+
+        //return entity;
+        //return query.FirstOrDefault(); made changes according to chatgpt
+        //Category? categoryFromDB2 = _db.Categories.Where(u => u.Id==id).FirstOrDefault(); //Used for complex queries
+
 
         //Category,Covertype
-        public IEnumerable<T> GetAll(string? includeProperties = null)
+        public IEnumerable<T> GetAll(Expression<Func<T, bool>>? filter,string? includeProperties = null)
         {
             IQueryable<T> query = dbSet;
+            if (filter != null)
+            {
+                query = query.Where(filter);
+            }
             if (!string.IsNullOrEmpty(includeProperties))
             {
                 foreach (var includeProp in includeProperties

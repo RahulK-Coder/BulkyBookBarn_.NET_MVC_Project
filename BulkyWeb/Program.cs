@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using BulkyBook.Utility;
 using Microsoft.AspNetCore.Identity.UI.Services;
+using Stripe;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +15,8 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<ApplicationDBContext>(options => 
 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))); //Adding DB new table called Category and Product
+
+builder.Services.Configure<StripeSettings>(builder.Configuration.GetSection("Stripe"));
 
 //If added this part then it will make email confirmation (options => options.SignIn.RequireConfirmedAccount = true) /// Addidentity will give us an option to add user and role
 //AddEntityFrameworkStores addes the database tables for identityusers table
@@ -27,7 +30,7 @@ builder.Services.ConfigureApplicationCookie(options => //Need to add this part a
 });
 
 builder.Services.AddRazorPages();
-builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>(); //////
 builder.Services.AddScoped<IEmailSender, EmailSender>();
 
 var app = builder.Build();
@@ -42,6 +45,7 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+StripeConfiguration.ApiKey = builder.Configuration.GetSection("Stripe:SecretKey").Get<string>();
 
 app.UseRouting();
 app.UseAuthentication();

@@ -1,8 +1,10 @@
 using BulkyBook.DataAccess.Repository.IRepository;
 using BulkyBook.Models;
 using BulkyBookWeb.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using System.Security.Claims;
 
 namespace BulkyBookWeb.Areas.Customer.Controllers
 {
@@ -26,8 +28,42 @@ namespace BulkyBookWeb.Areas.Customer.Controllers
 
         public IActionResult Details(int productID)
         {
-            Product product = _unitOfWork.Product.Get(u => u.Id == productID, includeProperties: "Category");
-            return View(product);
+            ShoppingCart cart = new()
+            {
+                Product = _unitOfWork.Product.Get(u => u.Id == productID, includeProperties: "Category"),
+                Count = 1,
+                ProductId = productID
+            };
+            return View(cart);
+        }
+
+        [HttpPost]
+        [Authorize] //Adding this as we want only authorized user to add to cart who are logged in
+        public IActionResult Details(ShoppingCart shoppingCart)
+        {
+            var claimsIdentity = (ClaimsIdentity)User.Identity;
+            var userId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
+            shoppingCart.ApplicationUserID = userId;
+
+            ShoppingCart cartFromDb = _unitOfWork.ShoppingCart.Get(u => u.ApplicationUserID == userId &&
+            u.ProductId == shoppingCart.ProductId);
+
+            if (cartFromDb != null)
+            {
+                // Shopping cart exists, so update the count
+                cartFromDb.Count += shoppingCart.Count;
+                _unitOfWork.ShoppingCart.Update(cartFromDb);
+            }
+            else
+            {
+                // New item, so add to the shopping cart
+                _unitOfWork.ShoppingCart.Add(shoppingCart);
+
+            }
+            TempData["success"] = "Cart updated successfully";
+            _unitOfWork.Save();
+
+            return RedirectToAction(nameof(Index));
         }
 
         public IActionResult Privacy()

@@ -17,8 +17,13 @@ namespace BulkyBookWeb.DataAddess.Data
             
         public DbSet<Category> Categories { get; set; }
         public DbSet<Product> Products { get; set; } //We added the product model here to connect to DB
-
+        public DbSet<Company> Companies { get; set; } //Table name will be Companies
+        public DbSet<ShoppingCart> ShoppingCarts { get; set; } //Table name will be ShoppingCarts
         public DbSet<ApplicationUser> ApplicationUsers { get; set; } //This is mapper to add more properties to the existing identityuser 
+
+        public DbSet<OrderHeader> OrderHeaders { get; set; }
+        public DbSet<OrderDetail> OrderDetails { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -28,6 +33,42 @@ namespace BulkyBookWeb.DataAddess.Data
                 new Category { Id = 2, Name = "Sci-Fi", DisplayOrder = 2 },
                 new Category { Id = 3, Name = "History", DisplayOrder = 3 }
                 );
+
+            modelBuilder.Entity<Company>().HasData(
+                new Company
+                {
+                    Id = 1,
+                    Name = "Tech Solution",
+                    StreetAddress = "123 Tech St",
+                    City = "Tech City",
+                    PostalCode = "12121",
+                    State = "IL",
+                    PhoneNumber = "88777888767"
+                },
+                new Company
+                {
+                    Id = 2,
+                    Name = "Vivid Solution",
+                    StreetAddress = "999 Tech St",
+                    City = "Vivid City",
+                    PostalCode = "66666",
+                    State = "IL",
+                    PhoneNumber = "9999888767"
+                },
+                new Company
+                {
+                    Id = 3,
+                    Name = "Readers Solution",
+                    StreetAddress = "888 Tech St",
+                    City = "La la City",
+                    PostalCode = "12121",
+                    State = "IL",
+                    PhoneNumber = "77777888767"
+                }
+                );
+
+
+
             modelBuilder.Entity<Product>().HasData(
                 new Product
                 {
